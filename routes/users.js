@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const account = require("../models/account.js")
+const account = require("../models/account.js");
 
 //login handle
 router.get('/login',(req,res)=>{
@@ -47,7 +47,23 @@ router.post('/account',(req,res)=>{
                 name : name,
                 email : email,
                 password : password
-            })}
+            })
+            bcrypt.genSalt(10,(err,salt)=> 
+            bcrypt.hash(newUser.password,salt,
+                (err,hash)=> {
+                    if(err) throw err;
+                        //save pass to hash
+                        newUser.password = hash;
+                    //save user
+                    newUser.save()
+                    .then((value)=>{
+                        console.log(value)
+                    res.redirect('/login');
+                    })
+                    .catch(value=> console.log(value));
+                      
+                }));
+            }
         })
     }
 });
