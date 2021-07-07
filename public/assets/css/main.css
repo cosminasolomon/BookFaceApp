@@ -3219,3 +3219,9 @@ input, select, textarea {
 			}
 
 	}
+
+	#br {
+		display: flex;
+		flex-direction: column;
+	}
+	
