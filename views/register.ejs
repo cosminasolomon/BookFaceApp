@@ -28,28 +28,39 @@
 
     <div id="main">
         <section id="three">
-            <h2>Welcome back !</h2>
+            <h2>Create your account</h2>
             <%- include ('./partials/messages') %>
                 <div class="row">
                     <div class="col-8 col-12-small">
-                        <form method="POST" action="/users/login">
+                        <form method="POST" action="/users/register">
                             <div class="row gtr-uniform gtr-50">
                                 <div class="col-6 col-12-xsmall">
-                                    <input type="email" name="email" id="email" placeholder="Email" />
+                                    <input type="text" name="name" id="name" placeholder="Name"
+                                        value="<%= typeof name != 'undefined' ? name : '' %>" />
                                 </div>
                                 <div class="col-6 col-12-xsmall">
-                                    <input type="password" name="password" id="password" placeholder="Password" />
+                                    <input type="email" name="email" id="email" placeholder="Email"
+                                        value="<%= typeof email != 'undefined' ? email : '' %>" />
+                                </div>
+                                <div class="col-6 col-12-xsmall">
+                                    <input type="password" name="password" id="password" placeholder="Create password"
+                                        value="<%= typeof password != 'undefined' ? password : '' %>" />
+                                </div>
+                                <div class="col-6 col-12-xsmall">
+                                    <input type="password" name="password2" id="password2"
+                                        placeholder="Confirm password"
+                                        value="<%= typeof password2 != 'undefined' ? password2 : '' %>" />
                                 </div>
                             </div>
                             <ul class="actions">
-                                <li><input type="submit" value="Log in" /></li>
+                                <li><input type="submit" value="Sign up" /></li>
                             </ul>
                         </form>
                     </div>
                 </div>
         </section>
     </div>
-        <!-- Footer -->
+         <!-- Footer -->
         <footer id="footer">
             <div class="inner">
                 <ul class="icons">
