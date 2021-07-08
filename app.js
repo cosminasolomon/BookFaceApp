@@ -23,10 +23,14 @@ app.get('/login',(req, res) => {
 app.get('/profile',(req, res) => {
     res.render('profile.ejs');
 });
+app.get('/dashboard',(req, res) => {
+    res.render('dashboard.ejs');
+});
 
 //ejs
 app.set("view engine", "ejs");
 app.use(expressEjsLayout);
+
 //BodyParser
 app.use(express.urlencoded({ extended: false}));
 //express session
@@ -69,12 +73,7 @@ mongoose.set("useFindAndModify", false);
  app.listen(3000, () => console.log("Server Up and running 3000"));
  });
 
-// //POST METHOD
-// app.post('/register',async (req, res) => {
-//     console.log(req.body)
-//     const accountPOST = new register(req.body);
-//     try {await accountPOST.save();res.redirect("/register");} catch (err) {res.redirect("/register");}
-// });
+
 
 
 
