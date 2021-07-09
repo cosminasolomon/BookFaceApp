@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Strata by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 
 <head>
@@ -19,20 +14,25 @@
     <header id="header">
         <div class="inner">
             <a href="#" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
-            <h1><strong>I am Strata</strong>, a super simple<br />
-                responsive site template freebie<br />
-                crafted by <a href="http://html5up.net">HTML5 UP</a>.</h1>
+            <h1><strong>I am a Potato</strong>, a super simple<br />
+				Potato<br/></h1>
+			<h3>Crafted by Cosmina & Jinane (the potato team).</h3>	
         </div>
     </header>
 
     <div id="main">
         <section id="three">
-            <h1> Welcome <%= user.name %>
-            </h1>
-            <h2>Create your profile</h2>
+            <h1> Welcome </h1>
 
+            <h2>Create your profile</h2>
             <div class="row">
                 <div class="col-8 col-12-small">
+
+                    <form action="/uploadphoto" enctype="multipart/form-data" method="POST">
+                        <input type="file" name="img" accept="image/*">
+                        <input type="submit" value="Upload Photo">
+                    </form>
+
                     <form method="POST" action="/users/dashboard">
                         <div class="row gtr-uniform gtr-50">
                             <div class="col-6 col-12-xsmall">
@@ -43,6 +43,25 @@
                                 <input type="text" name="username" id="username" placeholder="Username"
                                     value="<%= typeof username != 'undefined' ? username : '' %>" />
                             </div>
+                            <!-- 
+                                <input type="file" class="form-control" id="uploadImageUrl" name='img'
+                                    aria-describedby="uploadImageUrl" aria-label="upload">
+                                <button class="btn btn-outline-success create-plant__search-btn"
+                                    type="submit">Search</button>
+                                <input id='disabled-input' name='img' class="form-control" type="text"
+                                    placeholder="Image Url" aria-label="Disabled input example" required />
+                                <div class="invalid-feedback">
+                                    Please search and select an image or upload a new one.
+                                </div>
+                             
+
+                            <div class="col-6 col-12-xsmall">
+                                <input type="text" name='img' id='disabled-input' placeholder="Upload your photo"
+                                    aria-label="Disabled input example"
+                                    value="<%= typeof img != 'undefined' ? img : '' %>" />
+                            </div>-->
+
+
                             <div class="col-6 col-12-xsmall">
                                 <input type="text" name="city" id="city" placeholder="City"
                                     value="<%= typeof city != 'undefined' ? city : '' %>" />
@@ -51,7 +70,7 @@
                                 <input type="date" name="birthdate" id="birthdate" placeholder="Birthdate"
                                     value="<%= typeof birthdate != 'undefined' ? birthdate : '' %>" />
                             </div>
-                            <div class="col-12 col-12-xsmall"  >
+                            <div class="col-12 col-12-xsmall">
                                 <input type="text" name="aboutme" id="aboutme" placeholder="About me"
                                     value="<%= typeof aboutme != 'undefined' ? aboutme : '' %>" />
                             </div>
@@ -66,7 +85,6 @@
             <ul class="actions">
                 <li><a href="/">Logout</a></li>
             </ul>
-
         </section>
 
 
@@ -75,6 +93,8 @@
     <!-- Footer -->
     <footer id="footer">
         <div class="inner">
+
+
             <ul class="icons">
                 <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
                 <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
