@@ -9,6 +9,8 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require("passport");
 
+const profile = require("./models/profile");
+
 app.use("/static", express.static("public"));
 
 app.get('/',(req, res) => {
@@ -74,6 +76,8 @@ mongoose.set("useFindAndModify", false);
  });
 
 
-
-
+// post request for editing the profile
+app.post('/users/dashboard', (req, res) => {
+    console.log('Hellooooooooooooooooo!')
+  })
 

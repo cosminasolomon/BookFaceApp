@@ -27,10 +27,9 @@
 
     <div id="main">
         <section id="three">
-            <h1> Welcome <%= user.name %>
-            </h1>
-            <h2>Create your profile</h2>
+            <h1> Welcome </h1>
 
+            <h2>Create your profile</h2>
             <div class="row">
                 <div class="col-8 col-12-small">
                     <form method="POST" action="/users/dashboard">
@@ -43,6 +42,14 @@
                                 <input type="text" name="username" id="username" placeholder="Username"
                                     value="<%= typeof username != 'undefined' ? username : '' %>" />
                             </div>
+                            
+                            <div class="col-6 col-12-xsmall">
+                                <input type="text" name='img' id='disabled-input' placeholder="Upload your photo"
+                                    aria-label="Disabled input example"
+                                    value="<%= typeof img != 'undefined' ? img : '' %>" />
+                            </div>
+
+
                             <div class="col-6 col-12-xsmall">
                                 <input type="text" name="city" id="city" placeholder="City"
                                     value="<%= typeof city != 'undefined' ? city : '' %>" />
@@ -51,7 +58,7 @@
                                 <input type="date" name="birthdate" id="birthdate" placeholder="Birthdate"
                                     value="<%= typeof birthdate != 'undefined' ? birthdate : '' %>" />
                             </div>
-                            <div class="col-12 col-12-xsmall"  >
+                            <div class="col-12 col-12-xsmall">
                                 <input type="text" name="aboutme" id="aboutme" placeholder="About me"
                                     value="<%= typeof aboutme != 'undefined' ? aboutme : '' %>" />
                             </div>
@@ -66,7 +73,6 @@
             <ul class="actions">
                 <li><a href="/">Logout</a></li>
             </ul>
-
         </section>
 
 
@@ -75,6 +81,8 @@
     <!-- Footer -->
     <footer id="footer">
         <div class="inner">
+
+
             <ul class="icons">
                 <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
                 <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>

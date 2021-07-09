@@ -3,6 +3,9 @@ const router = express.Router();
 const User = require("../models/user");
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const Profile = require("../models/profile");
+const {ensureAuthenticated} = require('../config/auth') ;
+
 //login handle
 router.get('/login', (req, res) => {
     res.render('login');
@@ -91,4 +94,17 @@ router.get('/logout', (req, res) => {
     req.flash('success_msg', 'Now logged out');
     res.redirect('/users/login');
 })
+
+
+
+//profile post handle
+router.post('/dashboard', ensureAuthenticated, async (req, res) => {
+    const { name, username, birthdate, city, aboutme } = req.body;
+    const profile = new Profile({name: name, username: username, birthdate: birthdate, city: city, aboutme: aboutme, user_id: req.user._id})
+    await profile.save();
+    res.redirect("/dashboard")
+});
+
+
+
 module.exports = router;
