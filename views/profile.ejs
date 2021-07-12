@@ -20,8 +20,8 @@
         <div class="inner">
             <a href="#" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
             <h1><strong>I am a Potato</strong>, a super simple<br />
-				Potato<br/></h1>
-			<h3>Crafted by Cosmina & Jinane (the potato team).</h3>	
+                Potato<br /></h1>
+            <h3>Crafted by Cosmina & Jinane (the potato team).</h3>
         </div>
     </header>
 
@@ -30,12 +30,14 @@
             <h2>My profile</h2>
             <div class="row">
                 <div class="col-8 col-12-small">
+                    <%= user %>
+                    <%= profile %>
                     <div> Picture</div>
-                    <div> Name</div>
-                    <div> Username</div>
-                    <div> City</div>
-                    <div> Birthdate</div>
-                    <div> About me </div>
+                    <div> Name : <%= profile.name %> </div>
+                    <div> Username <%= profile.username %></div>
+                    <div> City <%= profile.city %></div>
+                    <div> Birthdate <%= profile.birthdate %></div>
+                    <div> About me <%= profile.aboutme %></div>
                     <div> Our problem : 1 user can have many profile...</div>
                     <!-- <form method="POST" action="/users/dashboard">
                                 <div class="row gtr-uniform gtr-50">
