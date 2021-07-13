@@ -11,7 +11,8 @@ const passport = require("passport");
 const fs = require("fs");
 const multer = require("multer");
 
-const profile = require("./models/profile");
+const Profile = require("./models/profile");
+const User = require("./models/user");
 
 app.use("/static", express.static("public"));
 
@@ -23,9 +24,6 @@ app.get('/register',(req, res) => {
 });
 app.get('/login',(req, res) => {
     res.render('login.ejs');
-});
-app.get('/profile',(req, res) => {
-    res.render('profile.ejs');
 });
 app.get('/dashboard',(req, res) => {
     res.render('dashboard.ejs');
@@ -54,10 +52,6 @@ app.use((req,res,next)=> {
     })
 
 
-// app.post('/',(req, res) => {console.log(req.body);});
-
-// app.listen(3800, () => console.log("Server Up and running 3800"));
-
 // Routes : sign in - sign out 
 app.use('/',require('./routes/index'));
 app.use('/users',require('./routes/users'));
@@ -77,47 +71,13 @@ mongoose.set("useFindAndModify", false);
  app.listen(3000, () => console.log("Server Up and running 3000"));
  });
 
-
-// post request for editing the profile
-app.post('/users/dashboard', (req, res) => {
-    console.log('Hellooooooooooooooooo!')
-  })
-
-
-// SET STORAGE
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'uploads')
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now())
-    }
-  })
-  var upload = multer({ storage: storage });
-
-  app.get("/dashboard",(req,res)=>{
-    res.render("dashboard");
-});
-
-  app.post("/uploadphoto",upload.single('img'),(req,res)=>{
-    var img = fs.readFileSync(req.file.path);
-    var encode_img = img.toString('base64');
-    var final_img = {
-        contentType:req.file.mimetype,
-        image:new Buffer(encode_img,'base64')
-    };
-    image.create(final_img,function(err,result){
-        if(err){
-            console.log(err);
-        }else{
-            console.log(result.img.Buffer);
-            console.log("Saved To database");
-            res.contentType(final_img.contentType);
-            res.send(final_img.image);
-        }
+ app.get("/profile", (req, res) => {
+    Profile.find({} , (error, profile) => {
+      res.render('profile', {
+        profile: req.profile,
+        user: req.user,
+      })
+    console.log(res)
+    console.log(req)
     })
-});
-
-app.post("/profile", (req, res) => {
-    const { name, username, img, birthdate, city, aboutme } = req.body;
-});
+  })

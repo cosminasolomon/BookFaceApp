@@ -21,7 +21,7 @@ router.get('/dashboard', (req, res) => {
 //Register handle
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/dashboard',
+        successRedirect: '/profile',
         failureRedirect: '/users/login',
         failureFlash: true
     })(req, res, next)
@@ -79,7 +79,7 @@ router.post('/register', (req, res) => {
                                 .then((value) => {
                                     console.log(value)
                                     req.flash('success_msg', 'You have now registered!');
-                                    res.redirect('/users/login');
+                                    res.redirect('/dashboard')
                                 })
                                 .catch(value => console.log(value));
 
@@ -95,38 +95,14 @@ router.get('/logout', (req, res) => {
     res.redirect('/users/login');
 })
 
-router.get('/profile', (req, res) => {
-    console.log(req.body);
-//     req.logout();
-//     req.flash('success_msg', 'Now logged out');
-//     res.redirect('/users/login');
-    res.render('users')
-});
 
 //profile post handle
 router.post('/dashboard', ensureAuthenticated, async (req, res) => {
     const { name, username, birthdate, city, aboutme } = req.body;
     const profile = new Profile({name: name, username: username, birthdate: birthdate, city: city, aboutme: aboutme, user_id: req.user._id})
-    await profile.save();
+    await profile.save(); 
     res.redirect("/profile");
-
-    // if (a===a) {
-    //     User.findOne({ email: email }).exec((err, user) => {
-    //         console.log(user);
-    //         if (user) {
-    //             errors.push({ msg: 'email already registered' });
-    //             res.render('register', { errors, name, email, password, password2 })
-    //         } else {
-    //             const newUser = new User({
-    //                 name: name,
-    //                 email: email,
-    //                 password: password,
-    //                 password2: password2
-    //             });
-    // }
     
 });
-
-
 
 module.exports = router;
