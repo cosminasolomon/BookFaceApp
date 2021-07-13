@@ -1,84 +1,119 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Strata by HTML5 UP</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
     <link rel="stylesheet" href="/static/assets/css/main.css" />
-</head>
+  </head>
 
-<body class="is-preload">
-
+  <body class="is-preload">
     <!-- Header -->
     <header id="header">
-        <div class="inner">
-            <a href="#" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
-            <h1><strong>I am a Potato</strong>, a super simple<br />
-				Potato<br/></h1>
-			<h3>Crafted by Cosmina & Jinane (the potato team).</h3>	
-        </div>
+      <div class="inner">
+        <a href="#"><img src="images/avatar.jpg" alt="" /></a>
+        <h1>
+          <strong>I am a Potato</strong>, a super simple<br />
+          Potato<br />
+        </h1>
+        <h3>Crafted by Cosmina & Jinane (the potato team).</h3>
+      </div>
     </header>
 
-
     <div id="main">
-        <section id="three">
-            <h2>Create your account</h2>
-            <%- include ('./partials/messages') %>
-                <div class="row">
-                    <div class="col-8 col-12-small">
-                        <form method="POST" action="/users/register">
-                            <div class="row gtr-uniform gtr-50">
-                                <div class="col-6 col-12-xsmall">
-                                    <input type="text" name="name" id="name" placeholder="Name"
-                                        value="<%= typeof name != 'undefined' ? name : '' %>" />
-                                </div>
-                                <div class="col-6 col-12-xsmall">
-                                    <input type="email" name="email" id="email" placeholder="Email"
-                                        value="<%= typeof email != 'undefined' ? email : '' %>" />
-                                </div>
-                                <div class="col-6 col-12-xsmall">
-                                    <input type="password" name="password" id="password" placeholder="Create password"
-                                        value="<%= typeof password != 'undefined' ? password : '' %>" />
-                                </div>
-                                <div class="col-6 col-12-xsmall">
-                                    <input type="password" name="password2" id="password2"
-                                        placeholder="Confirm password"
-                                        value="<%= typeof password2 != 'undefined' ? password2 : '' %>" />
-                                </div>
-                            </div>
-                            <ul class="actions">
-                                <li><input type="submit" value="Sign up" /></li>
-                            </ul>
-                        </form>
-                    </div>
+      <section id="three">
+        <h2>Create your account</h2>
+        <%- include ('./partials/messages') %>
+        <div class="row">
+          <div class="col-8 col-12-small">
+            <form method="POST" action="/users/register">
+              <div class="row gtr-uniform gtr-50">
+                <div class="col-6 col-12-xsmall">
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Name"
+                    value="<%= typeof name != 'undefined' ? name : '' %>"
+                  />
                 </div>
-        </section>
+                <div class="col-6 col-12-xsmall">
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    value="<%= typeof email != 'undefined' ? email : '' %>"
+                  />
+                </div>
+                <div class="col-6 col-12-xsmall">
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Create password"
+                    value="<%= typeof password != 'undefined' ? password : '' %>"
+                  />
+                </div>
+                <div class="col-6 col-12-xsmall">
+                  <input
+                    type="password"
+                    name="password2"
+                    id="password2"
+                    placeholder="Confirm password"
+                    value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+                  />
+                </div>
+              </div>
+              <ul class="actions">
+                <li><input type="submit" value="Sign up" /></li>
+              </ul>
+            </form>
+          </div>
+        </div>
+      </section>
     </div>
-         <!-- Footer -->
-        <footer id="footer">
-            <div class="inner">
-                <ul class="icons">
-                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                    <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-                    <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-                    <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-                </ul>
-                <ul class="copyright">
-                    <li>&copy; Untitled</li>
-                    <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-                </ul>
-            </div>
-        </footer>
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="inner">
+        <ul class="icons">
+          <li>
+            <a href="#" class="icon brands fa-twitter"
+              ><span class="label">Twitter</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="icon brands fa-github"
+              ><span class="label">Github</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="icon brands fa-dribbble"
+              ><span class="label">Dribbble</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="icon solid fa-envelope"
+              ><span class="label">Email</span></a
+            >
+          </li>
+        </ul>
+        <ul class="copyright">
+          <li>&copy; Untitled</li>
+          <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </div>
+    </footer>
 
-        <!-- Scripts -->
-        <script src="../public/assets/js/jquery.min.js"></script>
-        <script src="../public/assets/js/jquery.poptrox.min.js"></script>
-        <script src="../public/assets/js/browser.min.js"></script>
-        <script src="../public/assets/js/breakpoints.min.js"></script>
-        <script src="../public/assets/js/util.js"></script>
-        <script src="../public/assets/js/main.js"></script>
-
-</body>
-
+    <!-- Scripts -->
+    <script src="../public/assets/js/jquery.min.js"></script>
+    <script src="../public/assets/js/jquery.poptrox.min.js"></script>
+    <script src="../public/assets/js/browser.min.js"></script>
+    <script src="../public/assets/js/breakpoints.min.js"></script>
+    <script src="../public/assets/js/util.js"></script>
+    <script src="../public/assets/js/main.js"></script>
+  </body>
 </html>
