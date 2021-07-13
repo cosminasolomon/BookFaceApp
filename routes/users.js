@@ -4,7 +4,7 @@ const User = require("../models/user");
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const Profile = require("../models/profile");
-const {ensureAuthenticated} = require('../config/auth') ;
+const { ensureAuthenticated } = require('../config/auth');
 
 //login handle
 router.get('/login', (req, res) => {
@@ -14,17 +14,13 @@ router.get('/register', (req, res) => {
     res.render('register')
 })
 
-router.get('/dashboard', (req, res) => {
-    res.render('dashboard')
-})
-
 //Register handle
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect: '/profile',
-        failureRedirect: '/users/login',
-        failureFlash: true
-    })(req, res, next)
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/profile',
+    failureRedirect: '/users/login',
+    failureFlash: true
+}), (req, res) => {
+
 })
 //register post handle
 router.post('/register', (req, res) => {
@@ -95,14 +91,10 @@ router.get('/logout', (req, res) => {
     res.redirect('/users/login');
 })
 
+router.get('/dashboard', (req, res) => {
+    res.render('dashboard')
+})
 
-//profile post handle
-router.post('/dashboard', ensureAuthenticated, async (req, res) => {
-    const { name, username, birthdate, city, aboutme } = req.body;
-    const profile = new Profile({name: name, username: username, birthdate: birthdate, city: city, aboutme: aboutme, user_id: req.user._id})
-    await profile.save(); 
-    res.redirect("/profile");
-    
-});
+
 
 module.exports = router;

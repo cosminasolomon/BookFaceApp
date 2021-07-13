@@ -15,8 +15,8 @@
         <div class="inner">
             <a href="#" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
             <h1><strong>I am a Potato</strong>, a super simple<br />
-				Potato<br/></h1>
-			<h3>Crafted by Cosmina & Jinane (the potato team).</h3>	
+                Potato<br /></h1>
+            <h3>Crafted by Cosmina & Jinane (the potato team).</h3>
         </div>
     </header>
 
@@ -28,12 +28,12 @@
             <div class="row">
                 <div class="col-8 col-12-small">
 
-                    <form action="/uploadphoto" enctype="multipart/form-data" method="POST">
+                    <!-- <form action="/uploadphoto" enctype="multipart/form-data" method="POST">
                         <input type="file" name="img" accept="image/*">
                         <input type="submit" value="Upload Photo">
-                    </form>
+                    </form> -->
 
-                    <form method="POST" action="/users/dashboard">
+                    <form method="POST" action="/profiles/createprofile">
                         <div class="row gtr-uniform gtr-50">
                             <div class="col-6 col-12-xsmall">
                                 <input type="text" name="name" id="name" placeholder="Name"
@@ -75,9 +75,9 @@
                                     value="<%= typeof aboutme != 'undefined' ? aboutme : '' %>" />
                             </div>
                         </div>
-                        <ul class="actions">
-                            <li><input type="submit" value="Save your informations" /></li>
-                        </ul>
+                        
+                            <button type="submit">Save your informations</button>
+                            
                     </form>
                 </div>
             </div>

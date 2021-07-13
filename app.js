@@ -13,6 +13,7 @@ const multer = require("multer");
 
 const Profile = require("./models/profile");
 const User = require("./models/user");
+const { ensureAuthenticated } = require('./config/auth');
 
 app.use("/static", express.static("public"));
 
@@ -34,7 +35,7 @@ app.set("view engine", "ejs");
 app.use(expressEjsLayout);
 
 //BodyParser
-app.use(express.urlencoded({ extended: false}));
+app.use(express.urlencoded({ extended: true}));
 //express session
 app.use(session({
     secret : 'secret',
@@ -71,13 +72,22 @@ mongoose.set("useFindAndModify", false);
  app.listen(3000, () => console.log("Server Up and running 3000"));
  });
 
- app.get("/profile", (req, res) => {
-    Profile.find({} , (error, profile) => {
-      res.render('profile', {
-        profile: req.profile,
-        user: req.user,
-      })
-    console.log(res)
-    console.log(req)
-    })
-  })
+app.get('/profile', async (req, res) => {
+    const profiles = await Profile.find({}).populate('author');
+    //res.send(profile);
+    res.render('profile.ejs', {profiles})
+});
+
+//profile post handle
+app.post('/profiles/createprofile', ensureAuthenticated, async (req, res) => {
+    const user = await User.find({ hasProfile: false })
+    console.log(user)
+    if (user.length) {
+           const profile = new Profile(req.body);
+           console.log(profile);
+           profile.author = user._id
+           await User.findByIdAndUpdate(user._id, {hasProfile: true})
+           await profile.save(); 
+           res.redirect("/profile");
+    } else { res.redirect("/") }
+});
