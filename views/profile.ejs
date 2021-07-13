@@ -29,52 +29,23 @@
         <section id="three">
             <h2>My profile</h2>
             <div class="row">
-                <div class="col-8 col-12-small">
-                    <%= user %>
-                    <%= profile %>
-                    <div> Picture</div>
-                    <div> Name : <%= profile.name %> </div>
-                    <div> Username <%= profile.username %></div>
-                    <div> City <%= profile.city %></div>
-                    <div> Birthdate <%= profile.birthdate %></div>
-                    <div> About me <%= profile.aboutme %></div>
-                    <div> Our problem : 1 user can have many profile...</div>
-                    <!-- <form method="POST" action="/users/dashboard">
-                                <div class="row gtr-uniform gtr-50">
-                                    <div class="col-6 col-12-xsmall">
-                                        <input type="text" name="name" id="name" placeholder="Name"
-                                        value="<%= typeof name != 'undefined' ? name : '' %>" />
-                                    </div>
-                            <div class="col-6 col-12-xsmall">
-                                <input type="text" name="username" id="username" placeholder="Username"
-                                    value="<%= typeof username != 'undefined' ? username : '' %>" />
-                            </div>
-                            
-                            <div class="col-6 col-12-xsmall">
-                                <input type="text" name='img' id='disabled-input' placeholder="Upload your photo"
-                                    aria-label="Disabled input example"
-                                    value="<%= typeof img != 'undefined' ? img : '' %>" />
-                            </div>
 
-
-                            <div class="col-6 col-12-xsmall">
-                                <input type="text" name="city" id="city" placeholder="City"
-                                    value="<%= typeof city != 'undefined' ? city : '' %>" />
-                            </div>
-                            <div class="col-6 col-12-xsmall">
-                                <input type="date" name="birthdate" id="birthdate" placeholder="Birthdate"
-                                    value="<%= typeof birthdate != 'undefined' ? birthdate : '' %>" />
-                            </div>
-                            <div class="col-12 col-12-xsmall">
-                                <input type="text" name="aboutme" id="aboutme" placeholder="About me"
-                                    value="<%= typeof aboutme != 'undefined' ? aboutme : '' %>" />
-                            </div>
+                <% profiles.forEach(profile=> { %>
+                    <div class="col-8 col-12-small" style='border:1px solid black; padding:10px; margin:10px'>
+                        <div> Picture</div>
+                        <div> Name : <%= profile.name %>
                         </div>
-                        <ul class="actions">
-                            <li><input type="submit" value="Save your informations" /></li>
-                        </ul>
-                    </form> -->
-                </div>
+                        <div> Username <%= profile.username %>
+                        </div>
+                        <div> City <%= profile.city %>
+                        </div>
+                        <div> Birthdate <%= profile.birthdate %>
+                        </div>
+                        <div> About me <%= profile.aboutme %>
+                        </div></div>
+                        <% }) %>
+                    
+
             </div>
 
             <ul class="actions">
