@@ -54,7 +54,7 @@ app.use((req, res, next) => {
 // Routes : sign in - sign out
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
-
+app.use("/users", require("./routes/profiles"));
 //connection to DB
 
 dotenv.config();
@@ -73,29 +73,3 @@ mongoose.connect(
     app.listen(3000, () => console.log("Server Up and running 3000"));
   }
 );
-
-app.get("/profile", ensureAuthenticated, async (req, res) => {
-  const profiles = await Profile.find({ user_id: req.user._id });
-  //res.send(profile);
-  res.render("profile.ejs", { profiles });
-});
-
-//profile post handle
-app.post("/profiles/createprofile", async (req, res) => {
-  const profile = new Profile({
-    name: req.body.name,
-    username: req.body.username,
-    city: req.body.city,
-    birthdate: req.body.birthdate,
-    aboutme: req.body.aboutme,
-    user_id: req.user._id,
-  });
-  // console.log(profile);
-  // profile.author = user._id;
-  try {
-    await profile.save();
-    res.redirect("/profile");
-  } catch (err) {
-    console.log(err);
-  }
-});
