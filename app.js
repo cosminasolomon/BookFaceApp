@@ -12,9 +12,6 @@ const cloudinary = require("cloudinary");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const fileupload = require("express-fileupload");
 
-// const register = require("./models/user");
-// const { ensureAuthenticated } = require("./config/auth");
-
 //passport config:
 require("./config/passport")(passport);
 
@@ -69,42 +66,3 @@ app.use("/profiles", require("./routes/profiles"));
 app.use("/posts", require("./routes/posts"));
 
 app.listen(3000);
-
-// app.get("/profile", ensureAuthenticated, async (req, res) => {
-//   const profiles = await Profile.find({ user_id: req.user._id });
-//   //res.send(profile);
-//   res.render("profile.ejs", { profiles });
-// });
-
-// //profile post handle
-// app.post("/profiles/createprofile", async (req, res) => {
-//   const profile = new Profile({
-//     name: req.body.name,
-//     username: req.body.username,
-//     city: req.body.city,
-//     birthdate: req.body.birthdate,
-//     aboutme: req.body.aboutme,
-//     // user_id: req.user._id,
-//   });
-//   // console.log(profile);
-//   // profile.author = user._id;
-//   try {
-//     await profile.save();
-//     res.redirect("/profile");
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
-//connection to db
-// mongoose.set("useFindAndModify", false);
-
-// mongoose.connect(
-//   process.env.DB_CONNECT,
-//   { useNewUrlParser: true, useUnifiedTopology: true },
-//   () => {
-//     console.log("Connected to db!");
-//     app.listen(3000, () => console.log("Server Up and running 3000"));
-//   }
-// );
-
-// dotenv.config();

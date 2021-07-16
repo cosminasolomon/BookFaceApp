@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const ProfileSchema = new mongoose.Schema({
+  url: {
+    type: String,
+    required: true,
+  },
   name: { type: String, required: true },
   username: { type: String, required: true },
   city: { type: String, required: true },
