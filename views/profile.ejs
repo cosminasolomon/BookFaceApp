@@ -31,30 +31,59 @@
             <div class="row">
                 <header>
                     <div class="container">
-                      <div class="profile">
-                        <div class="profile-image">
-                          <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
+                        <div class="profile">
+                          <div class="profile-image">
+                            <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" style="border-radius: 50%" alt="">
+                          </div>
+                          <div class="profile-user-settings">
+                            <h1 class="profile-user-name" ><%= posts.username %></h1>
+                            <!-- <button class="btn profile-edit-btn">Edit Profile</button>
+                            <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button> -->
+                          </div>
+                          <div class="profile-stats">
+                            <p><span class="profile-stat-count"><%= posts.posts.length %></span> posts</p>
+                            <p></p><span class="profile-real-name">📆<%= posts.birthdate.toUTCString().substring(4, 16) %></span></p>
+                          </div>
+                          <div class="profile-bio">
+                            <p><span class="profile-real-name">📍<%= posts.city %></p></span>
+                          </div>
+                          <div class="profile-bio">
+                            <p><span class="profile-real-name">📓 <%= posts.aboutme %> </p></span>
+                          </div>
                         </div>
-                        <div class="profile-user-settings">
-                          <h1 class="profile-user-name"><%= user.profile.username %></h1>
-                          <button class="btn profile-edit-btn">Edit Profile</button>
-                          <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
-                        </div>
-                        <div class="profile-stats">
-                          <ul>
-                           
-                            <li><span class="profile-stat-count"><%= user.profile.username %></span> Popularity</li>
-                          </ul>
-                        </div>
-                        <div class="profile-bio">
-                          <p><span class="profile-real-name"><%= user.profile.name %></span> My favorite Animal is <%= user.profile.city %></p>
-                        </div>
-                      </div>
                       <!-- End of profile section -->
 
-
+                    </div>
+                    <!-- End of container -->
+                  
+                  </header>
+            </div>
+            </section>
             </div>
 
+
+  <div class="container">
+
+    <div class="gallery">
+
+      <% posts.posts.reverse().forEach((post) => { %>
+        <div class="gallery-item" tabindex="0">
+          <div class="post_image" style="background-image: url(<%= post.url %>)"></div>
+          <div class="gallery-item-info">
+          </div>
+        </div>
+    <% })%>
+
+
+    </div>
+    <!-- End of gallery -->
+
+    <!-- <div class="loader"></div> -->
+
+  </div>
+  <!-- End of container -->
+
+</main>
             <ul class="actions">
                 <li><a href="/">Logout</a></li>
             </ul>

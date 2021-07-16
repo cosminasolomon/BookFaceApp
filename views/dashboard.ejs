@@ -25,15 +25,12 @@
 
     <div id="main">
       <section id="three">
-        <h1>Welcome</h1>
+        <!-- <h1>Welcome</h1> -->
         <% if(!user.profile){ %>
         <h2>Create your profile</h2>
         <div class="row">
           <div class="col-8 col-12-small">
-            <!-- <form action="/uploadphoto" enctype="multipart/form-data" method="POST">
-                        <input type="file" name="img" accept="image/*">
-                        <input type="submit" value="Upload Photo">
-                    </form> -->
+
 
             <form method="POST" action="/profiles/new">
               <div class="row gtr-uniform gtr-50">
@@ -55,23 +52,6 @@
                     value="<%= typeof username != 'undefined' ? username : '' %>"
                   />
                 </div>
-                <!-- 
-                                <input type="file" class="form-control" id="uploadImageUrl" name='img'
-                                    aria-describedby="uploadImageUrl" aria-label="upload">
-                                <button class="btn btn-outline-success create-plant__search-btn"
-                                    type="submit">Search</button>
-                                <input id='disabled-input' name='img' class="form-control" type="text"
-                                    placeholder="Image Url" aria-label="Disabled input example" required />
-                                <div class="invalid-feedback">
-                                    Please search and select an image or upload a new one.
-                                </div>
-                             
-
-                            <div class="col-6 col-12-xsmall">
-                                <input type="text" name='img' id='disabled-input' placeholder="Upload your photo"
-                                    aria-label="Disabled input example"
-                                    value="<%= typeof img != 'undefined' ? img : '' %>" />
-                            </div>-->
 
                 <div class="col-6 col-12-xsmall">
                   <input
@@ -85,6 +65,7 @@
                 <div class="col-6 col-12-xsmall">
                   <input
                     type="date"
+
                     name="birthdate"
                     id="birthdate"
                     placeholder="Birthdate"
@@ -112,31 +93,61 @@
             <div class="container">
               <div class="profile">
                 <div class="profile-image">
-                  <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
+                  <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" style="border-radius: 50%" alt="">
                 </div>
                 <div class="profile-user-settings">
-                  <h1 class="profile-user-name"><%= user.profile.username %></h1>
-                  <button class="btn profile-edit-btn">Edit Profile</button>
-                  <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
+                  <h1 class="profile-user-name" ><%= user.profile.username %></h1>
+                  <!-- <button class="btn profile-edit-btn">Edit Profile</button>
+                  <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button> -->
                 </div>
+                <p><span class="profile-stat-count"><%= posts.posts.length %></span> posts</p>
                 <div class="profile-stats">
-                  <ul>
-                    
-                    <li><span class="profile-stat-count"><%= user.profile.username %></span> Popularity</li>
-                  </ul>
+                  <p></p><span class="profile-real-name">📆<%= user.profile.birthdate.toUTCString().substring(4, 16) %></span></p>
                 </div>
                 <div class="profile-bio">
-                  <p><span class="profile-real-name"><%= user.profile.name %></span> My favorite Animal is <%= user.profile.city %></p>
+                  <p><span class="profile-real-name">📍<%= user.profile.city %></p></span>
+                </div>
+                <div class="profile-bio">
+                  <p><span class="profile-real-name">📓 <%= user.profile.aboutme %> </p></span>
                 </div>
               </div>
               <!-- End of profile section -->
-           
-            <% }%>
-
+                </div>
+    <!-- End of container -->
+    
+  </header>
+  <main>
+    <form action="/posts/new" method="POST" enctype="multipart/form-data">
+      <label for="title">Title</label>
+      <input type="text" name="title">
+      <label for="post_content"></label>
+      <input type="text" name="post_content">
+      <input type='file' name='image' />
+      <input type="submit">
+    </form>
+    <hr>
+    <div class="container">
+      <div class="gallery">
+        <% posts.posts.reverse().forEach((post) => { %>
+          <div class="gallery-item" tabindex="0">
+            <h4><%= post.title %> </h4>
+            <h5><%= post.post_content %></h5>
+            <img src="<%= post.url %>" alt="" height="500px" width=auto>
+          </div>
+        <hr>
+      <% })%>
+      </div>
+      <!-- End of gallery -->
+  
+    
+  </main>
+  <% } %>
+  
+    <div class="container">
+        <p> Welcome <%= user.name %></p>
         <ul class="actions">
           <li><a href="/">Logout</a></li>
         </ul>
-      </section>
     </div>
 
     <!-- Footer -->

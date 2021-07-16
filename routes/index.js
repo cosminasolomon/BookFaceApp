@@ -2,9 +2,13 @@ const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated } = require("../config/auth");
 const Profile = require("../models/profile").Profile;
+const Post = require("../models/post").Post;
+
 //login page
 router.get("/", (req, res) => {
-  res.render("welcome");
+  Post.find({}, (err, allPosts) => {
+    res.render("welcome", { allposts: allPosts });
+  });
 });
 //register page
 router.get("/register", (req, res) => {

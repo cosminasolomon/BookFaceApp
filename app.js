@@ -7,24 +7,31 @@ const expressEjsLayout = require("express-ejs-layouts");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
+const multer = require("multer");
+const cloudinary = require("cloudinary");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const fileupload = require("express-fileupload");
 
-// const fs = require("fs");
-// const multer = require("multer");
-const register = require("./models/user");
-const Profile = require("./models/profile");
-const User = require("./models/user");
-const { ensureAuthenticated } = require("./config/auth");
+// const register = require("./models/user");
+// const { ensureAuthenticated } = require("./config/auth");
 
-app.use("/static", express.static("public"));
+//passport config:
+require("./config/passport")(passport);
 
-app.get("/", (req, res) => {
-  res.render("welcome.ejs");
-});
-app.get("/register", (req, res) => {
-  res.render("register.ejs");
-});
-app.get("/login", (req, res) => {
-  res.render("login.ejs");
+//mongoose DIOGO version
+mongoose
+  .connect(
+    "mongodb+srv://jinane3:jinane3@bookface.wanum.mongodb.net/BookFace?retryWrites=true&w=majority",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => console.log("connected,,"))
+  .catch((err) => console.log(err));
+
+//Cloudinary config
+cloudinary.config({
+  cloud_name: "dmqk246zd",
+  api_key: "916155187143796",
+  api_secret: "9A0ZLM0-LyLOI_HnVsqtqtzrYnw",
 });
 
 //ejs
@@ -32,7 +39,8 @@ app.set("view engine", "ejs");
 app.use(expressEjsLayout);
 
 //BodyParser
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 //express session
 app.use(
   session({
@@ -51,29 +59,16 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes : sign in - sign out
+app.use(fileupload({ useTempFiles: true }));
+app.use("/static", express.static("public"));
+
+// Routes
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
 app.use("/profiles", require("./routes/profiles"));
+app.use("/posts", require("./routes/posts"));
 
-//connection to DB
-
-dotenv.config();
-
-//passport config:
-require("./config/passport")(passport);
-
-//connection to db
-mongoose.set("useFindAndModify", false);
-
-mongoose.connect(
-  process.env.DB_CONNECT,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  () => {
-    console.log("Connected to db!");
-    app.listen(3000, () => console.log("Server Up and running 3000"));
-  }
-);
+app.listen(3000);
 
 // app.get("/profile", ensureAuthenticated, async (req, res) => {
 //   const profiles = await Profile.find({ user_id: req.user._id });
@@ -100,3 +95,16 @@ mongoose.connect(
 //     console.log(err);
 //   }
 // });
+//connection to db
+// mongoose.set("useFindAndModify", false);
+
+// mongoose.connect(
+//   process.env.DB_CONNECT,
+//   { useNewUrlParser: true, useUnifiedTopology: true },
+//   () => {
+//     console.log("Connected to db!");
+//     app.listen(3000, () => console.log("Server Up and running 3000"));
+//   }
+// );
+
+// dotenv.config();
