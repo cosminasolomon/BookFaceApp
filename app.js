@@ -1,30 +1,34 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const router = express.Router();
 const app = express();
 const dotenv = require("dotenv");
-const mongoose = require("mongoose");
-const register = require("./models/user");
 const expressEjsLayout = require("express-ejs-layouts");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
-// const fs = require("fs");
-// const multer = require("multer");
+const multer = require("multer");
+const cloudinary = require("cloudinary");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const fileupload = require("express-fileupload");
 
-const Profile = require("./models/profile");
-const User = require("./models/user");
-const { ensureAuthenticated } = require("./config/auth");
+//passport config:
+require("./config/passport")(passport);
 
-app.use("/static", express.static("public"));
+//mongoose DIOGO version
+mongoose
+  .connect(
+    "mongodb+srv://cosminamaria:Maria2020@cluster0.xixsp.mongodb.net/Cluster0?retryWrites=true&w=majority",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => console.log("connected,,"))
+  .catch((err) => console.log(err));
 
-app.get("/", (req, res) => {
-  res.render("welcome.ejs");
-});
-app.get("/register", (req, res) => {
-  res.render("register.ejs");
-});
-app.get("/login", (req, res) => {
-  res.render("login.ejs");
+//Cloudinary config
+cloudinary.config({
+  cloud_name: "dmqk246zd",
+  api_key: "916155187143796",
+  api_secret: "9A0ZLM0-LyLOI_HnVsqtqtzrYnw",
 });
 
 //ejs
@@ -32,7 +36,8 @@ app.set("view engine", "ejs");
 app.use(expressEjsLayout);
 
 //BodyParser
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 //express session
 app.use(
   session({
@@ -51,9 +56,18 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes : sign in - sign out
+app.use(fileupload({ useTempFiles: true }));
+app.use("/static", express.static("public"));
+
+// Routes
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
+
+app.use("/profiles", require("./routes/profiles"));
+app.use("/posts", require("./routes/posts"));
+
+app.listen(3000);
+
 app.use("/users", require("./routes/profiles"));
 //connection to DB
 
@@ -73,3 +87,4 @@ mongoose.connect(
     app.listen(3000, () => console.log("Server Up and running 3000"));
   }
 );
+

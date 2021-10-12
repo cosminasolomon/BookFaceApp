@@ -3,7 +3,9 @@ const router = express.Router();
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
+
 const { ensureAuthenticated } = require("../config/auth");
+
 
 //login handle
 router.get("/login", (req, res) => {
@@ -14,15 +16,13 @@ router.get("/register", (req, res) => {
 });
 
 //Register handle
-router.post(
-  "/login",
+router.post("/login", (req, res, next) => {
   passport.authenticate("local", {
-    successRedirect: "/profile",
+    successRedirect: "/dashboard",
     failureRedirect: "/users/login",
     failureFlash: true,
-  }),
-  (req, res) => {}
-);
+  })(req, res, next);
+});
 //register post handle
 router.post("/register", (req, res) => {
   const { name, email, password, password2 } = req.body;
@@ -76,7 +76,7 @@ router.post("/register", (req, res) => {
               .then((value) => {
                 console.log(value);
                 req.flash("success_msg", "You have now registered!");
-                res.redirect("/dashboard");
+                res.redirect("/users/login");
               })
               .catch((value) => console.log(value));
           })
