@@ -18,7 +18,7 @@ require("./config/passport")(passport);
 //mongoose DIOGO version
 mongoose
   .connect(
-    "mongodb+srv://jinane3:jinane3@bookface.wanum.mongodb.net/BookFace?retryWrites=true&w=majority",
+    "mongodb+srv://cosminamaria:Maria2020@cluster0.xixsp.mongodb.net/Cluster0?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("connected,,"))
