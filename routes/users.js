@@ -4,6 +4,9 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 
+const { ensureAuthenticated } = require("../config/auth");
+
+
 //login handle
 router.get("/login", (req, res) => {
   res.render("login");

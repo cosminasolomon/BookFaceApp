@@ -62,7 +62,29 @@ app.use("/static", express.static("public"));
 // Routes
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
+
 app.use("/profiles", require("./routes/profiles"));
 app.use("/posts", require("./routes/posts"));
 
 app.listen(3000);
+
+app.use("/users", require("./routes/profiles"));
+//connection to DB
+
+dotenv.config();
+
+//passport config:
+require("./config/passport")(passport);
+
+//connection to db
+mongoose.set("useFindAndModify", false);
+
+mongoose.connect(
+  process.env.DB_CONNECT,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => {
+    console.log("Connected to db!");
+    app.listen(3000, () => console.log("Server Up and running 3000"));
+  }
+);
+
